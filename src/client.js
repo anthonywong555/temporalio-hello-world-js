@@ -7,7 +7,7 @@ async function run() {
     // // Connect to localhost with default ConnectionOptions.
     // // In production, pass options to the Connection constructor to configure TLS and other settings:
     // The app expects the environment variable TEMPORAL_CLUSTER_HOST, and assumes the port is 7233
-    address: process.env.TEMPORAL_CLUSTER_HOST, // as provisioned
+    address: `${process.env.TEMPORAL_CLUSTER_HOST}:7233`, // as provisioned
     // tls: {} // as provisioned
   });
 
