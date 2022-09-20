@@ -1,6 +1,7 @@
 import { Worker } from '@temporalio/worker';
 import { URL } from 'url';
 import * as activities from './activities.js';
+import 'dotenv/config';
 
 async function run() {
   // Step 1: Register Workflows and Activities with the Worker and connect to
@@ -9,6 +10,7 @@ async function run() {
     workflowsPath: new URL('./workflows.js', import.meta.url).pathname,
     activities,
     taskQueue: 'hello-javascript',
+    connection: process.env.TEMPORAL_CLUSTER_HOST
   });
   // Worker connects to localhost by default and uses console.error for logging.
   // Customize the Worker by passing more options to create():

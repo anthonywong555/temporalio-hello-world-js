@@ -2,15 +2,12 @@ import { Connection, WorkflowClient } from '@temporalio/client';
 import { example } from './workflows.js';
 import 'dotenv/config';
 
-async function run() {  
-  console.info(`TEMPORAL_CLUSTER_HOST: ${process.env.TEMPORAL_CLUSTER_HOST}`);
-  console.log(`TEMPORAL_CLUSTER_HOST: ${process.env.TEMPORAL_CLUSTER_HOST}`);
-
+async function run() {
   const connection = await Connection.connect({
     // // Connect to localhost with default ConnectionOptions.
     // // In production, pass options to the Connection constructor to configure TLS and other settings:
     // The app expects the environment variable TEMPORAL_CLUSTER_HOST, and assumes the port is 7233
-    address: `${process.env.TEMPORAL_CLUSTER_HOST}`, // as provisioned
+    address: process.env.TEMPORAL_CLUSTER_HOST, // as provisioned
     // tls: {} // as provisioned
   });
 
