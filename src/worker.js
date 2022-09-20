@@ -10,7 +10,7 @@ async function run() {
     workflowsPath: new URL('./workflows.js', import.meta.url).pathname,
     activities,
     taskQueue: 'hello-javascript',
-    connection: process.env.TEMPORAL_CLUSTER_HOST
+    connection: `${process.env.TEMPORAL_CLUSTER_HOST}:7233`
   });
   // Worker connects to localhost by default and uses console.error for logging.
   // Customize the Worker by passing more options to create():
