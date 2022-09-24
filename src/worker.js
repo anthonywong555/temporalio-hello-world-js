@@ -1,4 +1,4 @@
-import { Worker } from '@temporalio/worker';
+import { Worker, NativeConnection } from '@temporalio/worker';
 import { URL } from 'url';
 import * as activities from './activities.js';
 import 'dotenv/config';
@@ -6,11 +6,16 @@ import 'dotenv/config';
 async function run() {
   // Step 1: Register Workflows and Activities with the Worker and connect to
   // the Temporal server.
+
+  const connection = await NativeConnection.create({
+    address: process.env.TEMPORAL_CLUSTER_HOST,
+  });
+
   const worker = await Worker.create({
+    connection,
     workflowsPath: new URL('./workflows.js', import.meta.url).pathname,
     activities,
     taskQueue: 'hello-javascript',
-    connection: `${process.env.TEMPORAL_CLUSTER_HOST}:7233`
   });
   // Worker connects to localhost by default and uses console.error for logging.
   // Customize the Worker by passing more options to create():
